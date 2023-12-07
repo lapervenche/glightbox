@@ -1,27 +1,27 @@
 # GLightbox
 
-GLightbox is a pure javascript lightbox. It can display images, iframes, inline content and videos with optional autoplay for YouTube, Vimeo and even self hosted videos.
+GLIGHTBOX est un pur javascript lightbox. Il peut afficher des images, des iframes, du contenu en ligne et des vidéos avec une lecture automatique en option pour YouTube, Vimeo et même des vidéos hébergées.
 
 ## Features
 
-- **Small** - only 11KB Gzipped
-- **Fast and Responsive** - works with any screen size
-- **Gallery Support** - Create multiple galleries
-- **Response Images Support** - Let the browser use the optimal image for the current screen resolution
-- **Video Support** - Youtube, Vimeo and self hosted videos with autoplay
-- **Inline content support** - display any inline content
-- **Iframe support** - need to embed an iframe? no problem
-- **Keyboard Navigation** - esc, arrows keys, tab and enter is all you need
-- **Touch Navigation** - mobile touch events
-- **Zoomable images** - zoom and drag images on mobile and desktop
-- **API** - control the lightbox with the provided methods
-- **Themeable** - create your skin or modify the animations with some minor css changes
+- **Léger** - seulement 11KB Gzipped.
+- **Rapide et Responsive** - fonctionne avec n'importe quelle taille d'écran.
+- **Support multiples galeries** - Créer plusieurs galeries.
+- **Responsive Images Support** - Laissez le navigateur utiliser l'image optimale pour la résolution de l'écran en cours.
+- **Vidéo Support** - Youtube, Vimeo et vidéos embarquées avec autoplay (ou non)
+- **Prise en charge de contenu en ligne** - afficher tout contenu en ligne.
+- **Iframe support** - besoin d'intégrer une iframe? Pas de problème glightbox le propose!
+- **Navigation au clavier** - esc, touches des flèches, onglet et entrée est tout ce dont vous avez besoin.
+- **Navigation tactile** - événements tactiles mobiles sont du voyage.
+- **Images zoomables** - zoommer et glisser sur les images sur mobile et sur ordinateur de bureau.
+- **API** - contrôler la boîte à lumière avec les méthodes fournies
+- **Skinable** - créez votre skin personnel ou modifiez les animations avec quelques modifications mineures de css
 
-## Live Demo
+## Demo en direct
 
 You can check the live demo [right here](https://biati-digital.github.io/glightbox/)
 
-## Usage
+## Utilisation
 
 ```bash
 $ npm install glightbox
@@ -119,7 +119,7 @@ data-srcset="img480.jpg 480w, img800.jpg 800w">
 </a>
 ```
 
-## Slide Options
+## Options des diapositives
 
 You can specify some options to each individual slide, the available options are:
 
@@ -199,44 +199,44 @@ myGallery.open();
 myGallery.setElements([...]);
 ```
 
-| Option | Type | Default | Description |
+| Option | Type | Defaut | Description |
 | --- | --- | --- | --- |
-| selector | string | `.glightbox` | Name of the selector for example '.glightbox' or 'data-glightbox' or '\*[data-glightbox]' |
-| elements | array | `null` | Instead of passing a selector you can pass all the items that you want in the gallery. |
-| skin | string | `clean` | Name of the skin, it will add a class to the lightbox so you can style it with css. |
-| openEffect | string | `zoom` | Name of the effect on lightbox open. (zoom, fade, none) |
-| closeEffect | string | `zoom` | Name of the effect on lightbox close. (zoom, fade, none) |
-| slideEffect | string | `slide` | Name of the effect on slide change. (slide, fade, zoom, none) |
-| moreText | string | `See more` | More text for descriptions on mobile devices. |
-| moreLength | number | `60` | Number of characters to display on the description before adding the moreText link (only for mobiles), if 0 it will display the entire description. |
-| closeButton | boolean | `true` | Show or hide the close button. |
-| touchNavigation | boolean | `true` | Enable or disable the touch navigation (swipe). |
-| touchFollowAxis | boolean | `true` | Image follow axis when dragging on mobile. |
-| keyboardNavigation | boolean | `true` | Enable or disable the keyboard navigation. |
-| closeOnOutsideClick | boolean | `true` | Close the lightbox when clicking outside the active slide. |
-| startAt | number | `0` | Start lightbox at defined index. |
-| width | number | `900px` | Default width for inline elements and iframes, you can define a specific size on each slide. You can use any unit for example 90% or 100vw for full width |
-| height | number | `506px` | Default height for inline elements and iframes, you can define a specific size on each slide.You can use any unit for example 90% or 100vh **For inline elements you can set the height to auto**. |
-| videosWidth | number | `960px` | Default width for videos. Videos are responsive so height is not required. The width can be in px % or even vw for example, 500px, 90% or 100vw for full width videos |
-| descPosition | string | `bottom` | Global position for slides description, you can define a specific position on each slide (bottom, top, left, right). |
-| loop | boolean | `false` | Loop slides on end. |
-| zoomable | boolean | `true` | Enable or disable zoomable images you can also use data-zoomable="false" on individual nodes. |
-| draggable | boolean | `true` | Enable or disable mouse drag to go prev and next slide (only images and inline content), you can also use data-draggable="false" on individual nodes. |
-| dragToleranceX | number | `40` | Used with draggable. Number of pixels the user has to drag to go to prev or next slide. |
-| dragToleranceY | number | `65` | Used with draggable. Number of pixels the user has to drag up or down to close the lightbox (Set 0 to disable vertical drag). |
-| dragAutoSnap | boolean | `false` | If true the slide will automatically change to prev/next or close if dragToleranceX or dragToleranceY is reached, otherwise it will wait till the mouse is released. |
-| preload | boolean | `true` | Enable or disable preloading. |
-| svg | object | `{}` | Set your own svg icons. |
-| cssEfects | object | 'See animations' | Define or adjust lightbox animations. See the Animations section in the README. |
-| lightboxHTML | string | 'See themes' | You can completely change the html of GLightbox. See the Themeable section in the README. |
-| slideHTML | string | 'See themes' | You can completely change the html of the individual slide. See the Themeable section in the README. |
-| autoplayVideos | boolean | `true` | Autoplay videos on open. |
-| autofocusVideos | boolean | `false` | If true video will be focused on play to allow keyboard sortcuts for the player, this will deactivate prev and next arrows to change slide so use it only if you know what you are doing. |
-| plyr | object | `{}` | [View video player options.](#video-player) |
+| selector | string | `.glightbox` | Nom du sélecteur par exemple  '.glightbox' ou 'data-glightbox' ou '\*[data-glightbox]' |
+| elements | array | `null` | Au lieu de passer un sélecteur, vous pouvez passer tous les éléments que vous voulez dans la galerie. |
+| skin | string | `clean` | Nom de votre skin, il ajoutera une classe à la boîte à lumière afin que vous puissiez la styler avec css. |
+| openEffect | string | `zoom` | Nom de l'effet sur la lightbox ouverte. (zoom, fade, none) |
+| closeEffect | string | `zoom` | Nom de l'effet sur la lightbox lors de sa fermeture.  (zoom, fade, none) |
+| slideEffect | string | `slide` | Nom de l'effet au changement de diapositive. . (slide, fade, zoom, none) |
+| moreText | string | `See more` | Plus de texte pour les descriptions sur les appareils mobiles. |
+| moreLength | number | `60` | Nombre de caractères à afficher sur la description avant d'ajouter le lien plus de texte (uniquement pour les mobiles), si 0 il affiche la description entière. |
+| closeButton | boolean | `true` | Montrez ou cachez le bouton de fermeture. |
+| touchNavigation | boolean | `true` | Activer ou désactiver la navigation tactile (swipe). |
+| touchFollowAxis | boolean | `true` | Suivre l'image en glissant sur mobile.. |
+| keyboardNavigation | boolean | `true` | Activer ou désactiver la navigation au clavier. |
+| closeOnOutsideClick | boolean | `true` | Fermez la lightbox en cliquant à l'extérieur de la diapositive active. |
+| startAt | number | `0` | Démarrer la lightbox à l'index défini. |
+| width | number | `900px` | Largeur par défaut pour les éléments en ligne et les iframes, vous pouvez définir une taille spécifique sur chaque diapositive. Vous pouvez utiliser n'importe quelle unité, par exemple 90 % ou 100vw pour la pleine largeur. |
+| height | number | `506px` | Hauteur par défaut pour les éléments en ligne et les iframes, vous pouvez définir une taille spécifique sur chaque diapositive. Vous pouvez utiliser n'importe quelle unité par exemple 90 % ou 100vh **Pour les éléments en ligne, vous pouvez mettre la hauteur à auto**. |
+| videosWidth | number | `960px` | Largeur par défaut pour les vidéos. Les vidéos sont réactives de sorte qu'il n'est pas nécessaire de stipuler la hauteur. La largeur peut être en px% ou même vw par example, 500px, 90% ou 100vw pour les vidéos pleine largeur |
+| descPosition | string | `bottom` | Position globale pour la description des diapositives, vous pouvez définir une position spécifique sur chaque diapositive (bottom, top, left, right). |
+| loop | boolean | `false` | Boucles de boucle de fin. |
+| zoomable | boolean | `true` | Permettre  l'activation ou la désactivation des images zoomables, vous pouvez également utiliser des données zoomables -zoomable="false" sur des nœuds individuels. |
+| draggable | boolean | `true` | Permettre  l'activation ou la désactivation la fonction glisser de la souris pour aller à la diapositive prev et suivante (uniquement les images et le contenu en ligne), vous pouvez également utiliser des données data-draggable="false" sur les nœuds individuels. |
+| dragToleranceX | number | `40` | Utilisé avec la fonction glisser. Nombre de pixels que l'utilisateur doit faire glisser pour passer à la diapositive prev ou suivante. |
+| dragToleranceY | number | `65` | Utilisé avec la fonction glisser. Nombre de pixels que l'utilisateur doit faire glisser vers le haut ou vers le bas pour fermer la boîte à lumière (réglez à 0 pour désactiver la traînée verticale). |
+| dragAutoSnap | boolean | `false` | Si true la diapositive change automatiquement en  prev/next ou fermer si le glissement de dragToleranceX ou dragToleranceY est atteint, sinon il attendra que la souris soit libérée. |
+| preload | boolean | `true` | Permettre ou désactiver le préchargement. |
+| svg | object | `{}` | Définissez vos propres icônes svg. |
+| cssEfects | object | 'See animations' | Définir ou ajuster les animations de la boîte à lumière. Voir la section Animations dans le README. |
+| lightboxHTML | string | 'See themes' | Vous pouvez complètement changer le html de GLightbox. Voir la section thématique du README. |
+| slideHTML | string | 'See themes' | Vous pouvez complètement changer le html de la diapositive individuelle. Voir la section thématique du README. |
+| autoplayVideos | boolean | `true` | L'auto-play des vidéos à l'ouverture. (mettre à false pour un lancement manuel d'une vidéo) |
+| autofocusVideos | boolean | `false` | Si true la vidéo sera axée sur la lecture pour permettre les raccourcis clavier pour le lecteur, cela désactivera les flèches prev et next pour changer la diapositive, donc ne l'utilisez que si vous savez ce que vous faites. |
+| plyr | object | `{}` | [Visualisez les options du lecteur vidéo.](#video-player) |
 
-## Events
+## Événements
 
-You can listen for events using your GLightbox instance (see example under the table). You can use the on() API method or once().
+Vous pouvez écouter les événements à l'aide de votre instance GLightbox (voir l'exemple sous le tableau). Vous pouvez utiliser la méthode API on() ou une fois().
 
 ```javascript
 const lightbox = GLightbox();
@@ -251,14 +251,14 @@ lightbox.once('slide_changed', () => {
 
 | Event Type          | Description                                                                                                                  |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| open                | Provide a function when the lightbox is opened.                                                                              |
-| close               | Provide a function when the lightbox is closed.                                                                              |
-| slide_before_change | Trigger a function before the slide is changed.                                                                              |
-| slide_changed       | Trigger a function after the slide is changed.                                                                               |
-| slide_before_load   | Trigger a function before a slide is loaded for the first time, the function will only be called once                        |
-| slide_after_load    | Trigger a function after a slide is loaded and it's content is set for the first time, the function will only be called once |
-| slide_inserted      | Trigger a function after a slide is inserted using insertSlide.                                                              |
-| slide_removed       | Trigger a function after a slide is removed`                                                                                 |
+| open                | Fournir une fonction lorsque la lightbox est ouverte.                                                                              |
+| close               | Fournir une fonction lorsque la lightbox est fermée.                                                                              |
+| slide_before_change | Déclencher une fonction avant le changement de diapositive.                                                                              |
+| slide_changed       | Déclencher une fonction après le changement de la diapositive.                                                                             |
+| slide_before_load   | Déclencher une fonction avant qu'une diapositive ne soit chargée pour la première fois, la fonction ne sera appelée qu'une seule fois                       |
+| slide_after_load    | Déclencher une fonction après qu'une diapositive est chargée et son contenu est défini pour la première fois, la fonction ne sera appelée qu'une seule fois |
+| slide_inserted      | Déclenchez une fonction après l'insertion d'une diapositive à l'aide d'insertSlide.                                                             |
+| slide_removed       | Déclencher une fonction après qu'une diapositive a été enlevée                                                                                 |
 
 ```javascript
 const lightbox = GLightbox();
@@ -357,21 +357,21 @@ lightbox.on('slide_removed', (index) => {
 });
 ```
 
-## Video player
+## Lecteur vidéo
 
-GLightbox includes "[Plyr](https://plyr.io/)" the best player out there, you can pass any Plyr option to the player, view all available options here [Plyr options](https://github.com/sampotts/plyr). GLightbox will only inject the player library if required and only when the lightbox is opened.
+GLightbox inclut "[Plyr](https://plyr.io/)"  le meilleur joueur, vous pouvez passer n'importe quelle option Plyr au joueur, voir toutes les options disponibles ici Plyr options](https://github.com/sampotts/plyr). GLightbox n'injectera la bibliothèque du lecteur que si nécessaire et seulement lorsque la boîte à lumière est ouverte.
 
-**Internet Explorer 11. If you need support for this browser you need to set the js url to use the polyfilled version. This is not the default because IE11 is ancient and we need to let it die.**
+**Internet Explorer 11. Si vous avez besoin d'aide pour ce navigateur, vous devez définir l'url js pour utiliser la version polyplique. Ce n'est pas la valeur par défaut parce que IE11 est ancien et nous devons le laisser mourir.**
 
-### Autoplay for mobile/tablet
+### Autoplay pour mobile/tablette
 
-Please note, autoplay is blocked in some browsers, there’s nothing we can do to change that unfortunately, the browser will decide if your video can be autoplayed. Please do not post issues about this, instead inform yourself about this topic:
+S'il vous plaît noter que l'autoplay est bloqué dans certains navigateurs, il n'y a rien que nous puissions faire pour changer que malheureusement, le navigateur décidera si votre vidéo peut être visualisée automatiquement. Veuillez ne pas publier de questions à ce sujet, informez-vous plutôt sur ce sujet:
 
 - [https://webkit.org/blog/6784/new-video-policies-for-ios/](https://webkit.org/blog/6784/new-video-policies-for-ios/)
 - [https://developers.google.com/web/updates/2017/09/autoplay-policy-changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
 - [https://hacks.mozilla.org/2019/02/firefox-66-to-block-automatically-playing-audible-video-and-audio/](https://hacks.mozilla.org/2019/02/firefox-66-to-block-automatically-playing-audible-video-and-audio/)
 
-they decide if a video can be autoplayed based in a few rules
+ils décident si une vidéo peut être auto-jouée en se basant sur quelques règles
 
 ```
 plyr: {
@@ -414,36 +414,36 @@ There are methods, setters and getters on a GLightbox object. The easiest way to
 const lightbox = GLightbox({ ...options });
 ```
 
-## Methods
+## Méthodes
 
-Example method use:
+Utilisation de la méthode par exemple:
 
 ```javascript
-lightbox.nextSlide(); // Go to next slide
-lightbox.close(); // Close the lightbox
+lightbox.nextSlide(); // Aller à la diapositive suivante
+lightbox.close(); // Fermer la lightbox
 ```
 
 | Option                 | Parameters         | Description                                                                |
 | ---------------------- | ------------------ | -------------------------------------------------------------------------- |
-| open                   | `node`             | Open the lightbox, you can optionally pass a node.                         |
-| openAt                 | `number`           | Open at specific index.                                                    |
-| close                  | `-`                | Close the lightbox.                                                        |
-| reload                 | `-`                | Reload the lightbox, after inserting content with ajax.                    |
-| destroy                | `-`                | Destroy and remove all attached events.                                    |
-| prevSlide              | `-`                | Go to the previous slide.                                                  |
-| nextSlide              | `-`                | Go to the next slide.                                                      |
-| goToSlide              | `number`           | Index of the slide.                                                        |
-| insertSlide            | `object, index`    | Insert a slide at the specified index.                                     |
-| removeSlide            | `index`            | Remove slide at the specified index.                                       |
-| getActiveSlide         | `-`                | Get active slide. It will return the active node.                          |
-| getActiveSlideIndex    | `-`                | Get active slide. It will return the active slide index.                   |
-| slidePlayerPlay        | `number`           | Play video in the specified slide.                                         |
-| slidePlayerPause       | `number`           | Pause video in the specified slide.                                        |
-| getSlidePlayerInstance | `node, index`      | Get the player instance of the specified slide.                            |
-| getAllPlayers          | `-`                | Get all players instance.                                                  |
-| setElements            | `[]`               | Update the lightbox gallery elements.                                      |
-| on                     | `string, function` | Set an event listener. See Events section                                  |
-| once                   | `string, function` | Set an event listener that will be triggered only once. See Events section |
+| open                   | `node`             | Ouvrir la lightbox, yvous pouvez éventuellement passer un noeud.                         |
+| openAt                 | `number`           | Ouvrir à l'index spécifique.                                                    |
+| close                  | `-`                | fermer la lightbox.                                                        |
+| reload                 | `-`                | Rechargez la lightbox, après avoir inséré du contenu avec de l'ajax.                    |
+| destroy                | `-`                | Détruire et enlever tous les événements attachés.                                    |
+| prevSlide              | `-`                |	Aller à la diapositive précédente.                                                  |
+| nextSlide              | `-`                | Aller à la diapositive suivante.                                                      |
+| goToSlide              | `number`           | Index de la diapositive.                                                        |
+| insertSlide            | `object, index`    | Insérer une diapositive à l'index spécifié.                                     |
+| removeSlide            | `index`            | Retirez la diapositive à l'index spécifié.                                       |
+| getActiveSlide         | `-`                | Obtenir un glissement actif. Il retournera le nœud actif.                          |
+| getActiveSlideIndex    | `-`                | Obtenez un glissement actif. Il retournera l'index du glissement actif.                   |
+| slidePlayerPlay        | `number`           | Lire la vidéo dans la diapositive spécifiée.                                         |
+| slidePlayerPause       | `number`           | Pause vidéo dans la diapositive spécifiée.                                        |
+| getSlidePlayerInstance | `node, index`      | Obtenir le lecteur vidéo de la diapositive spécifiée.                           |
+| getAllPlayers          | `-`                | Obtenez tous les lecteurs de vidéo.                                                  |
+| setElements            | `[]`               | Mettre à jour les éléments de la galerie de la lightbox.                                      |
+| on                     | `string, function` | Fixer un auditeur d'événement. Voir la section Événements                                 |
+| once                   | `string, function` | Définissez un auditeur d'événement qui ne sera déclenché qu'une seule fois. Voir la section Événements |
 
 ```javascript
 // Example set custom gallery items
@@ -527,9 +527,9 @@ doAjaxCall({...}).then(response => {
 
 ## Animations
 
-Animations are created with CSS, each effect has an in and out value and they are used to attach the correct classes to the node.
+Les animations sont créées avec CSS, chaque effet a une valeur entrée et sortie et ils sont utilisés pour attacher les classes correctes au nœud.
 
-For example if you are using
+Par exemple, si vous utilisez
 
 ```javascript
 const glightbox = GLightbox({
@@ -542,8 +542,7 @@ const glightbox = GLightbox({
   }
 });
 ```
-
-The open effect will use cssEfects.zoom.in and will add the class gzoomIn, if you take a look at the CSS you'll see:
+L'effet ouvert utilisera cssEfects.zoom.in et ajoutera la classe gzoomIn, si vous regardez le CSS vous verrez :
 
 ```javascript
 .gzoomIn {
@@ -561,9 +560,9 @@ The open effect will use cssEfects.zoom.in and will add the class gzoomIn, if yo
 }
 ```
 
-### Adding a custom animation
+### Ajout d'une animation personnalisée
 
-You can create any animation you want, you can find some inspiration in the Animate.css library, for example you can add the bounce animation like this:
+Vous pouvez créer n'importe quelle animation que vous voulez, vous pouvez trouver une inspiration dans la bibliothèque Animate.css, par exemple vous pouvez ajouter l'animation rebond comme ceci:
 
 ```javascript
 const glightbox = GLightbox({
@@ -620,9 +619,9 @@ const glightbox = GLightbox({
 }
 ```
 
-## Themeable
+## Thématique
 
-You can completely customize the structure of GLightbox and use CSS to change any part you want.
+Vous pouvez complètement personnaliser la structure de GLightbox et utiliser du CSS pour changer n'importe quelle partie que vous voulez. 
 
 ```javascript
 const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
@@ -660,7 +659,7 @@ const glightbox = GLightbox({
 
 You can also define a skin name and the lightbox will append the class name "glightbox-supercool" so you can customize it with CSS, this will leave a barebones structure so you can change the buttons appearance, etc.
 
-## Development
+## Développement
 
 ```bash
 $ npm install
@@ -669,7 +668,7 @@ $ npm run watch
 
 ## Browser Support
 
-GLightbox was tested in the following browsers.
+GLightbox a été testé dans les navigateurs suivants.
 
 - Safari
 - Mobile Safari
@@ -678,28 +677,26 @@ GLightbox was tested in the following browsers.
 - Firefox
 - Internet Explorer 11
 
-It will work in any browser that supports CSS Flexbox
+Il fonctionnera dans n'importe quel autre navigateur prenant en charge CSS Flexbox
 
-## Contributing
+## Contribution
+N'hésitez pas à signaler tout problème. Si vous souhaitez contribuer en corrigeant un bogue ou en mettant en œuvre une nouvelle fonctionnalité, veuillez d'abord lire le guide [CONTRIBUTING](./CONTRIBUTING.md).
 
-Feel free to report any issues! If you wish to contribute by fixing a bug or implementing a new feature, please first read the [CONTRIBUTING](./CONTRIBUTING.md) guide.
+## Dons
 
-## Donate
-
-If you find this code useful, please consider a donation to keep this project growing, any amount is appreciated.
+Si vous trouvez ce code utile, veuillez envisager un don pour maintenir l'augmentation de ce projet, n'importe quel montant est apprécié.
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/bdigital9816/5usd)
 
 ## Support
 
-We only provide support for bugs and feature requests, so please only post issues about this two topics, if you need help implementing GLightbox or you are just starting with HTML/CSS/Javascript please use stackoverlow, you'll be able to find more help there. This will help us to keep the issues related to the library and solve issues faster.
+Nous ne fournissons qu'un support pour les bogues et les demandes de fonctionnalités, donc s'il vous plaît ne postez que des problèmes sur ces deux sujets, si vous avez besoin d'aide pour implémenter GLightbox ou vous commencez tout juste avec HTML/CSS/Javascript s'il vous plaît utiliser stackoverlow, vous serez en mesure de trouver plus d'aide là-bas. Cela nous aidera à maintenir les questions liées à la bibliothèque et à résoudre les problèmes plus rapidement.
 
 ## Changelog
 
-#### Latest version vundefined
-
-See the [CHANGELOG.md](CHANGELOG.md) file for details
+#### Dernière version indéfinie
+Voir le fichier [CHANGELOG.md](CHANGELOG.md) pour plus de details.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Ce projet est sous licence du MIT - voir le dossier [LICENSE.md](LICENSE.md) pour plus de details.
