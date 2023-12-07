@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+   sans titre.html
+   Copyright 21 06 2023 Roger D. <roger-d@LMDE5>
+-->
+  <title>Lisez moi</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+      body {
+        background-color: #d2d2d2;
+      }
+      .divr {
+      margin: 15px;
+      background-color: #bfbfbf;
+      padding: 25px;
+      }
+
+  </style>
+</head>
+
+<body>
+<div class="divr">
+<h1 id="glightbox">GLightbox</h1>
+<p>GLIGHTBOX est un pur javascript lightbox. Il peut afficher des
+images, des iframes, du contenu en ligne et des vidéos avec une lecture
+automatique en option pour YouTube, Vimeo et même des vidéos
+hébergées.</p>
+<h2 id="caractéristiques">Caractéristiques</h2>
+<ul>
+<li><strong>Léger</strong> - seulement 11KB Gzipped.</li>
+<li><strong>Rapide et Responsive</strong> - fonctionne avec n'importe
+quelle taille d'écran.</li>
+<li><strong>Support multiples galeries</strong> - Créer plusieurs
+galeries.</li>
+<li><strong>Responsive Images Support</strong> - Laissez le navigateur
+utiliser l'image optimale pour la résolution de l'écran en cours.</li>
+<li><strong>Vidéo Support</strong> - Youtube, Vimeo et vidéos embarquées
+avec autoplay (ou non)</li>
+<li><strong>Prise en charge de contenu en ligne</strong> - afficher tout
+contenu en ligne.</li>
+<li><strong>Iframe support</strong> - besoin d'intégrer une iframe? Pas
+de problème glightbox le propose!</li>
+<li><strong>Navigation au clavier</strong> - esc, touches des flèches,
+onglet et entrée est tout ce dont vous avez besoin.</li>
+<li><strong>Navigation tactile</strong> - événements tactiles mobiles
+sont du voyage.</li>
+<li><strong>Images zoomables</strong> - zoommer et glisser sur les
+images sur mobile et sur ordinateur de bureau.</li>
+<li><strong>API</strong> - contrôler la boîte à lumière avec les
+méthodes fournies</li>
+<li><strong>Skinable</strong> - créez votre skin personnel ou modifiez
+les animations avec quelques modifications mineures de css</li>
+</ul>
+<h2 id="démo-en-direct">Démo en direct</h2>
+<p>Vous pouvez vérifier la démo en direct <a
+href="https://biati-digital.github.io/glightbox/">right here</a></p>
+<h2 id="utilisation">Utilisation</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install glightbox</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># OR</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> yarn add glightbox</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># OR</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bower install glightbox</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Using ESM specification</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&#39;/path/to/glightbox.js&#39;</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Using a bundler like webpack</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> GLightbox <span class="im">from</span> <span class="st">&#39;glightbox&#39;</span><span class="op">;</span></span></code></pre></div>
+<p>Ou télécharger et lier manuellement <code>glightbox.min.js</code>
+dans votre code HTML:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;dist/css/glightbox.css&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;dist/js/glightbox.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- UTILISER UN CDN --&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>({ <span class="op">...</span>options })<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Utilisation des modules ES --&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;module&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="st">&#39;https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js&#39;</span><span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>({ <span class="op">...</span>options })<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+<h2 id="examples">Examples</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Simple image --&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;large.jpg&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Vidéo --&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;https://vimeo.com/115041822&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Galerie --&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;large.jpg&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox3&quot;</span> <span class="er">data-gallery</span><span class="ot">=</span><span class="st">&quot;gallery1&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;video.mp4&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox3&quot;</span> <span class="er">data-gallery</span><span class="ot">=</span><span class="st">&quot;gallery1&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Simple Description --&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;large.jpg&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox4&quot;</span> <span class="er">data-glightbox</span><span class="ot">=</span><span class="st">&quot;title: My title; description: this is the slide description&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Description Avancée --&gt;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;large.jpg&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox5&quot;</span> <span class="er">data-glightbox</span><span class="ot">=</span><span class="st">&quot;title: My title; description: .custom-desc1&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox-desc custom-desc1&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>The content of this div will be used as the slide description<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>You can add links and any HTML you want<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- URL sans extension --&gt;</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;https://picsum.photos/1200/800&quot;</span> <span class="er">data-glightbox</span><span class="ot">=</span><span class="st">&quot;type: image&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Ou en utilisant plusieurs attributs de données --&gt;</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;https://picsum.photos/1200/800&quot;</span> <span class="er">data-type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Utilisation d&#39;images réactives: spécifiez les tailles et SRCSET via des attributs de données de la même manière</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">que vous le feriez avec la balise IMG.</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">     Voir:</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co"> --&gt;</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;deafult.jpg&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;glightbox6&quot;</span> <span class="er">data-title</span><span class="ot">=</span><span class="st">&quot;Responsive example&quot;</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="ot">data-description=</span><span class="st">&quot;Your browser will choose the optimal image for the resolution&quot;</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="ot">data-sizes=</span><span class="st">&quot;(max-width: 600px) 480px, 800px&quot;</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="ot">data-srcset=</span><span class="st">&quot;img480.jpg 480w, img800.jpg 800w&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;small.jpg&quot;</span> <span class="er">alt</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span></code></pre></div>
+<h2 id="options-des-diapositives">Options des diapositives</h2>
+<p>You can specify some options to each individual slide, the available
+options are:</p>
+<ul>
+<li>title</li>
+<li>alt</li>
+<li>description</li>
+<li>descPosition</li>
+<li>type</li>
+<li>effect</li>
+<li>width</li>
+<li>height</li>
+<li>zoomable</li>
+<li>draggable</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Configuration d&#39;une ligne --&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;large.jpg&quot;</span> <span class="er">data-glightbox</span><span class="ot">=</span><span class="st">&quot;title: Your title; description: description here; descPosition: left; type: image; effect: fade; width: 900px; height: auto; zoomable: true; draggable: true;&quot;</span><span class="kw">&gt;&lt;/a&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Plusieurs attributs de données / Vous pouvez utiliser les options comme attributs de données séparés --&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ot">  href=</span><span class="st">&quot;large.jpg&quot;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-title=</span><span class="st">&quot;My title&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-description=</span><span class="st">&quot;description here&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-desc-position=</span><span class="st">&quot;right&quot;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-type=</span><span class="st">&quot;image&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-effect=</span><span class="st">&quot;fade&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-width=</span><span class="st">&quot;900px&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-height=</span><span class="st">&quot;auto&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-zoomable=</span><span class="st">&quot;true&quot;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-draggable=</span><span class="st">&quot;true&quot;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;&lt;/a&gt;</span></span></code></pre></div>
+<h2 id="lightbox-options">Lightbox Options</h2>
+<p>Exemple d'utilisation des options.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">touchNavigation</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">loop</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">autoplayVideos</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Au lieu d&#39;utiliser un sélecteur, définissez les éléments de la galerie</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> myGallery <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">elements</span><span class="op">:</span> [</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;href&#39;</span><span class="op">:</span> <span class="st">&#39;https://picsum.photos/1200/800&#39;</span><span class="op">,</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;type&#39;</span><span class="op">:</span> <span class="st">&#39;image&#39;</span><span class="op">,</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;title&#39;</span><span class="op">:</span> <span class="st">&#39;My Title&#39;</span><span class="op">,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;description&#39;</span><span class="op">:</span> <span class="st">&#39;Example&#39;</span><span class="op">,</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;href&#39;</span><span class="op">:</span> <span class="st">&#39;https://picsum.photos/1200/800&#39;</span><span class="op">,</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;type&#39;</span><span class="op">:</span> <span class="st">&#39;image&#39;</span><span class="op">,</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;alt&#39;</span><span class="op">:</span> <span class="st">&#39;image text alternatives&#39;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;href&#39;</span><span class="op">:</span> <span class="st">&#39;https://www.youtube.com/watch?v=Ga6RYejo6Hk&#39;</span><span class="op">,</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;type&#39;</span><span class="op">:</span> <span class="st">&#39;video&#39;</span><span class="op">,</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;source&#39;</span><span class="op">:</span> <span class="st">&#39;youtube&#39;</span><span class="op">,</span> <span class="co">//vimeo, youtube or local</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;width&#39;</span><span class="op">:</span> <span class="dv">900</span><span class="op">,</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;content&#39;</span><span class="op">:</span> <span class="st">&#39;&lt;p&gt;This will append some html inside the slide&lt;/p&gt;&#39;</span> <span class="co">// read more in the API section</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;content&#39;</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;inline-example&#39;</span>) <span class="co">// this will append a node inside the slide</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">autoplayVideos</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>myGallery<span class="op">.</span><span class="fu">open</span>()<span class="op">;</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">// Si plus tard, vous devez modifier les éléments, vous pouvez utiliser setElements</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>myGallery<span class="op">.</span><span class="fu">setElements</span>([<span class="op">...</span>])<span class="op">;</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Type</th>
+<th>Defaut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>selector</td>
+<td>string</td>
+<td><code>.glightbox</code></td>
+<td>Nom du sélecteur par exemple '.glightbox' ou 'data-glightbox' ou
+'*[data-glightbox]'</td>
+</tr>
+<tr class="even">
+<td>elements</td>
+<td>array</td>
+<td><code>null</code></td>
+<td>Au lieu de passer un sélecteur, vous pouvez passer tous les éléments
+que vous voulez dans la galerie.</td>
+</tr>
+<tr class="odd">
+<td>skin</td>
+<td>string</td>
+<td><code>clean</code></td>
+<td>Nom de votre skin, il ajoutera une classe à la boîte à lumière afin
+que vous puissiez la styler avec css.</td>
+</tr>
+<tr class="even">
+<td>openEffect</td>
+<td>string</td>
+<td><code>zoom</code></td>
+<td>Nom de l'effet sur la lightbox ouverte. (zoom, fade, none)</td>
+</tr>
+<tr class="odd">
+<td>closeEffect</td>
+<td>string</td>
+<td><code>zoom</code></td>
+<td>Nom de l'effet sur la lightbox lors de sa fermeture. (zoom, fade,
+none)</td>
+</tr>
+<tr class="even">
+<td>slideEffect</td>
+<td>string</td>
+<td><code>slide</code></td>
+<td>Nom de l'effet au changement de diapositive. . (slide, fade, zoom,
+none)</td>
+</tr>
+<tr class="odd">
+<td>moreText</td>
+<td>string</td>
+<td><code>See more</code></td>
+<td>Plus de texte pour les descriptions sur les appareils mobiles.</td>
+</tr>
+<tr class="even">
+<td>moreLength</td>
+<td>number</td>
+<td><code>60</code></td>
+<td>Nombre de caractères à afficher sur la description avant d'ajouter
+le lien plus de texte (uniquement pour les mobiles), si 0 il affiche la
+description entière.</td>
+</tr>
+<tr class="odd">
+<td>closeButton</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Montrez ou cachez le bouton de fermeture.</td>
+</tr>
+<tr class="even">
+<td>touchNavigation</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Activer ou désactiver la navigation tactile (swipe).</td>
+</tr>
+<tr class="odd">
+<td>touchFollowAxis</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Suivre l'image en glissant sur mobile..</td>
+</tr>
+<tr class="even">
+<td>keyboardNavigation</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Activer ou désactiver la navigation au clavier.</td>
+</tr>
+<tr class="odd">
+<td>closeOnOutsideClick</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Fermez la lightbox en cliquant à l'extérieur de la diapositive
+active.</td>
+</tr>
+<tr class="even">
+<td>startAt</td>
+<td>number</td>
+<td><code>0</code></td>
+<td>Démarrer la lightbox à l'index défini.</td>
+</tr>
+<tr class="odd">
+<td>width</td>
+<td>number</td>
+<td><code>900px</code></td>
+<td>Largeur par défaut pour les éléments en ligne et les iframes, vous
+pouvez définir une taille spécifique sur chaque diapositive. Vous pouvez
+utiliser n'importe quelle unité, par exemple 90 % ou 100vw pour la
+pleine largeur.</td>
+</tr>
+<tr class="even">
+<td>height</td>
+<td>number</td>
+<td><code>506px</code></td>
+<td>Hauteur par défaut pour les éléments en ligne et les iframes, vous
+pouvez définir une taille spécifique sur chaque diapositive. Vous pouvez
+utiliser n'importe quelle unité par exemple 90 % ou 100vh <strong>Pour
+les éléments en ligne, vous pouvez mettre la hauteur à
+auto</strong>.</td>
+</tr>
+<tr class="odd">
+<td>videosWidth</td>
+<td>number</td>
+<td><code>960px</code></td>
+<td>Largeur par défaut pour les vidéos. Les vidéos sont réactives de
+sorte qu'il n'est pas nécessaire de stipuler la hauteur. La largeur peut
+être en px% ou même vw par example, 500px, 90% ou 100vw pour les vidéos
+pleine largeur</td>
+</tr>
+<tr class="even">
+<td>descPosition</td>
+<td>string</td>
+<td><code>bottom</code></td>
+<td>Position globale pour la description des diapositives, vous pouvez
+définir une position spécifique sur chaque diapositive (bottom, top,
+left, right).</td>
+</tr>
+<tr class="odd">
+<td>loop</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Boucles de boucle de fin.</td>
+</tr>
+<tr class="even">
+<td>zoomable</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Permettre l'activation ou la désactivation des images zoomables,
+vous pouvez également utiliser des données zoomables -zoomable="false"
+sur des nœuds individuels.</td>
+</tr>
+<tr class="odd">
+<td>draggable</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Permettre l'activation ou la désactivation la fonction glisser de la
+souris pour aller à la diapositive prev et suivante (uniquement les
+images et le contenu en ligne), vous pouvez également utiliser des
+données data-draggable="false" sur les nœuds individuels.</td>
+</tr>
+<tr class="even">
+<td>dragToleranceX</td>
+<td>number</td>
+<td><code>40</code></td>
+<td>Utilisé avec la fonction glisser. Nombre de pixels que l'utilisateur
+doit faire glisser pour passer à la diapositive prev ou suivante.</td>
+</tr>
+<tr class="odd">
+<td>dragToleranceY</td>
+<td>number</td>
+<td><code>65</code></td>
+<td>Utilisé avec la fonction glisser. Nombre de pixels que l'utilisateur
+doit faire glisser vers le haut ou vers le bas pour fermer la boîte à
+lumière (réglez à 0 pour désactiver la traînée verticale).</td>
+</tr>
+<tr class="even">
+<td>dragAutoSnap</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Si true la diapositive change automatiquement en prev/next ou fermer
+si le glissement de dragToleranceX ou dragToleranceY est atteint, sinon
+il attendra que la souris soit libérée.</td>
+</tr>
+<tr class="odd">
+<td>preload</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Permettre ou désactiver le préchargement.</td>
+</tr>
+<tr class="even">
+<td>svg</td>
+<td>object</td>
+<td><code>{}</code></td>
+<td>Définissez vos propres icônes svg.</td>
+</tr>
+<tr class="odd">
+<td>cssEfects</td>
+<td>object</td>
+<td>'See animations'</td>
+<td>Définir ou ajuster les animations de la boîte à lumière. Voir la
+section Animations dans le README.</td>
+</tr>
+<tr class="even">
+<td>lightboxHTML</td>
+<td>string</td>
+<td>'See themes'</td>
+<td>Vous pouvez complètement changer le html de GLightbox. Voir la
+section thématique du README.</td>
+</tr>
+<tr class="odd">
+<td>slideHTML</td>
+<td>string</td>
+<td>'See themes'</td>
+<td>Vous pouvez complètement changer le html de la diapositive
+individuelle. Voir la section thématique du README.</td>
+</tr>
+<tr class="even">
+<td>autoplayVideos</td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>L'auto-play des vidéos à l'ouverture. (mettre à false pour un
+lancement manuel d'une vidéo)</td>
+</tr>
+<tr class="odd">
+<td>autofocusVideos</td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Si true la vidéo sera axée sur la lecture pour permettre les
+raccourcis clavier pour le lecteur, cela désactivera les flèches prev et
+next pour changer la diapositive, donc ne l'utilisez que si vous savez
+ce que vous faites.</td>
+</tr>
+<tr class="even">
+<td>plyr</td>
+<td>object</td>
+<td><code>{}</code></td>
+<td><a href="#video-player">Visualisez les options du lecteur
+vidéo.</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="événements">Événements</h2>
+<p>Vous pouvez écouter les événements à l'aide de votre instance
+GLightbox (voir l'exemple sous le tableau). Vous pouvez utiliser la
+méthode API on() ou une fois().</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>()<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;open&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Do something</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">once</span>(<span class="st">&#39;slide_changed&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Do something just one time</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>Event Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>open</td>
+<td>Fournir une fonction lorsque la lightbox est ouverte.</td>
+</tr>
+<tr class="even">
+<td>close</td>
+<td>Fournir une fonction lorsque la lightbox est fermée.</td>
+</tr>
+<tr class="odd">
+<td>slide_before_change</td>
+<td>Déclencher une fonction avant le changement de diapositive.</td>
+</tr>
+<tr class="even">
+<td>slide_changed</td>
+<td>Déclencher une fonction après le changement de la diapositive.</td>
+</tr>
+<tr class="odd">
+<td>slide_before_load</td>
+<td>Déclencher une fonction avant qu'une diapositive ne soit chargée
+pour la première fois, la fonction ne sera appelée qu'une seule
+fois</td>
+</tr>
+<tr class="even">
+<td>slide_after_load</td>
+<td>Déclencher une fonction après qu'une diapositive est chargée et son
+contenu est défini pour la première fois, la fonction ne sera appelée
+qu'une seule fois</td>
+</tr>
+<tr class="odd">
+<td>slide_inserted</td>
+<td>Déclenchez une fonction après l'insertion d'une diapositive à l'aide
+d'insertSlide.</td>
+</tr>
+<tr class="even">
+<td>slide_removed</td>
+<td>Déclencher une fonction après qu'une diapositive a été enlevée</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>()<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_before_change&#39;</span><span class="op">,</span> ({ prev<span class="op">,</span> current }) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Prev slide&#39;</span><span class="op">,</span> prev)<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Current slide&#39;</span><span class="op">,</span> current)<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Prev and current are objects that contain the following data</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { slideIndex<span class="op">,</span> slideNode<span class="op">,</span> slideConfig<span class="op">,</span> player<span class="op">,</span> trigger } <span class="op">=</span> current<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideIndex - the slide index</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideNode - the node you can modify</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideConfig - will contain the configuration of the slide like title, description, etc.</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// player - the slide player if it exists otherwise will return false</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trigger - this will contain the element that triggers this slide, this can be a link, a button, etc in your HTML, it can be null if the elements in the gallery were set dinamically</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_changed&#39;</span><span class="op">,</span> ({ prev<span class="op">,</span> current }) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Prev slide&#39;</span><span class="op">,</span> prev)<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Current slide&#39;</span><span class="op">,</span> current)<span class="op">;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Prev and current are objects that contain the following data</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { slideIndex<span class="op">,</span> slideNode<span class="op">,</span> slideConfig<span class="op">,</span> player<span class="op">,</span> trigger } <span class="op">=</span> current<span class="op">;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideIndex - the slide index</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideNode - the node you can modify</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideConfig - will contain the configuration of the slide like title, description, etc.</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// player - the slide player if it exists otherwise will return false</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trigger - this will contain the element that triggers this slide, this can be a link, a button, etc in your HTML, it can be null if the elements in the gallery were set dinamically</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player) {</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>player<span class="op">.</span><span class="at">ready</span>) {</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>      <span class="co">// If player is not ready</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>      player<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;ready&#39;</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Do something when video is ready</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    player<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;play&#39;</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Started play&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    player<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;volumechange&#39;</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Volume change&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    player<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;ended&#39;</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Video ended&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">// Useful to modify the slide</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co">// before it&#39;s content is added</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_before_load&#39;</span><span class="op">,</span> (data) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">// data is an object that contain the following</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { slideIndex<span class="op">,</span> slideNode<span class="op">,</span> slideConfig<span class="op">,</span> player<span class="op">,</span> trigger } <span class="op">=</span> data<span class="op">;</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideIndex - the slide index</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideNode - the node you can modify</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideConfig - will contain the configuration of the slide like title, description, etc.</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">// player - the slide player if it exists otherwise will return false</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trigger - this will contain the element that triggers this slide, this can be a link, a button, etc in your HTML, it can be null if the elements in the gallery were set dinamically</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="co">// Useful to execute scripts that depends</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="co">// on the slide to be ready with all it&#39;s content</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="co">// and already has a height</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="co">// data will contain all the info about the slide</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_after_load&#39;</span><span class="op">,</span> (data) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">// data is an object that contain the following</span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { slideIndex<span class="op">,</span> slideNode<span class="op">,</span> slideConfig<span class="op">,</span> player<span class="op">,</span> trigger } <span class="op">=</span> data<span class="op">;</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideIndex - the slide index</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideNode - the node you can modify</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideConfig - will contain the configuration of the slide like title, description, etc.</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>  <span class="co">// player - the slide player if it exists otherwise will return false</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trigger - this will contain the element that triggers this slide, this can be a link, a button, etc in your HTML, it can be null if the elements in the gallery were set dinamically</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="co">// Trigger a function when a slide is inserted</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_inserted&#39;</span><span class="op">,</span> (data) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>  <span class="co">// data is an object that contain the following</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { slideIndex<span class="op">,</span> slideNode<span class="op">,</span> slideConfig<span class="op">,</span> player<span class="op">,</span> trigger } <span class="op">=</span> data<span class="op">;</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideIndex - the slide index</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideNode - the node you can modify</span></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>  <span class="co">// slideConfig - will contain the configuration of the slide like title, description, etc.</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>  <span class="co">// player - the slide player if it exists otherwise will return false</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trigger - null</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="co">// Trigger a function when a slide is removed</span></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;slide_removed&#39;</span><span class="op">,</span> (index) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>  <span class="co">// index is the position of the element in the gallery</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h2 id="lecteur-vidéo">Lecteur vidéo</h2>
+<p>GLightbox inclut "<a href="https://plyr.io/">Plyr</a>" le meilleur
+joueur, vous pouvez passer n'importe quelle option Plyr au joueur, voir
+toutes les options disponibles ici Plyr options](<a
+href="https://github.com/sampotts/plyr">https://github.com/sampotts/plyr</a>).
+GLightbox n'injectera la bibliothèque du lecteur que si nécessaire et
+seulement lorsque la boîte à lumière est ouverte.</p>
+<p><strong>Internet Explorer 11. Si vous avez besoin d'aide pour ce
+navigateur, vous devez définir l'url js pour utiliser la version
+polyplique. Ce n'est pas la valeur par défaut parce que IE11 est ancien
+et nous devons le laisser mourir.</strong></p>
+<h3 id="autoplay-pour-mobiletablette">Autoplay pour mobile/tablette</h3>
+<p>S'il vous plaît noter que l'autoplay est bloqué dans certains
+navigateurs, il n'y a rien que nous puissions faire pour changer que
+malheureusement, le navigateur décidera si votre vidéo peut être
+visualisée automatiquement. Veuillez ne pas publier de questions à ce
+sujet, informez-vous plutôt sur ce sujet:</p>
+<ul>
+<li><a
+href="https://webkit.org/blog/6784/new-video-policies-for-ios/"><a
+href="https://webkit.org/blog/6784/new-video-policies-for-ios/">https://webkit.org/blog/6784/new-video-policies-for-ios/</a></a></li>
+<li><a
+href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes"><a
+href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes">https://developers.google.com/web/updates/2017/09/autoplay-policy-changes</a></a></li>
+<li><a
+href="https://hacks.mozilla.org/2019/02/firefox-66-to-block-automatically-playing-audible-video-and-audio/"><a
+href="https://hacks.mozilla.org/2019/02/firefox-66-to-block-automatically-playing-audible-video-and-audio/">https://hacks.mozilla.org/2019/02/firefox-66-to-block-automatically-playing-audible-video-and-audio/</a></a></li>
+</ul>
+<p>ils décident si une vidéo peut être auto-jouée en se basant sur
+quelques règles</p>
+<pre><code>plyr: {
+    js: &#39;https://cdn.plyr.io/3.6.2/plyr.polyfilled.js&#39;,
+    ....</code></pre>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">plyr</span><span class="op">:</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">css</span><span class="op">:</span> <span class="st">&#39;https://cdn.plyr.io/3.5.6/plyr.css&#39;</span><span class="op">,</span> <span class="co">// Default not required to include</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">js</span><span class="op">:</span> <span class="st">&#39;https://cdn.plyr.io/3.5.6/plyr.js&#39;</span><span class="op">,</span> <span class="co">// Default not required to include</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">config</span><span class="op">:</span> {</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">ratio</span><span class="op">:</span> <span class="st">&#39;16:9&#39;</span><span class="op">,</span> <span class="co">// or &#39;4:3&#39;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">muted</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">hideControls</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">youtube</span><span class="op">:</span> {</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">noCookie</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">rel</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">showinfo</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">iv_load_policy</span><span class="op">:</span> <span class="dv">3</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">vimeo</span><span class="op">:</span> {</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">byline</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">portrait</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">title</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">speed</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">transparent</span><span class="op">:</span> <span class="kw">false</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h2 id="api">API</h2>
+<p>There are methods, setters and getters on a GLightbox object. The
+easiest way to access the GLightbox object is to set the return value
+from your call to a variable. For example:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lightbox <span class="op">=</span> <span class="fu">GLightbox</span>({ <span class="op">...</span>options })<span class="op">;</span></span></code></pre></div>
+<h2 id="méthodes">Méthodes</h2>
+<p>Utilisation de la méthode par exemple:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">nextSlide</span>()<span class="op">;</span> <span class="co">// Aller à la diapositive suivante</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">close</span>()<span class="op">;</span> <span class="co">// Fermer la lightbox</span></span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>open</td>
+<td><code>node</code></td>
+<td>Ouvrir la lightbox, yvous pouvez éventuellement passer un
+noeud.</td>
+</tr>
+<tr class="even">
+<td>openAt</td>
+<td><code>number</code></td>
+<td>Ouvrir à l'index spécifique.</td>
+</tr>
+<tr class="odd">
+<td>close</td>
+<td><code>-</code></td>
+<td>fermer la lightbox.</td>
+</tr>
+<tr class="even">
+<td>reload</td>
+<td><code>-</code></td>
+<td>Rechargez la lightbox, après avoir inséré du contenu avec de
+l'ajax.</td>
+</tr>
+<tr class="odd">
+<td>destroy</td>
+<td><code>-</code></td>
+<td>Détruire et enlever tous les événements attachés.</td>
+</tr>
+<tr class="even">
+<td>prevSlide</td>
+<td><code>-</code></td>
+<td>Aller à la diapositive précédente.</td>
+</tr>
+<tr class="odd">
+<td>nextSlide</td>
+<td><code>-</code></td>
+<td>Aller à la diapositive suivante.</td>
+</tr>
+<tr class="even">
+<td>goToSlide</td>
+<td><code>number</code></td>
+<td>Index de la diapositive.</td>
+</tr>
+<tr class="odd">
+<td>insertSlide</td>
+<td><code>object, index</code></td>
+<td>Insérer une diapositive à l'index spécifié.</td>
+</tr>
+<tr class="even">
+<td>removeSlide</td>
+<td><code>index</code></td>
+<td>Retirez la diapositive à l'index spécifié.</td>
+</tr>
+<tr class="odd">
+<td>getActiveSlide</td>
+<td><code>-</code></td>
+<td>Obtenir un glissement actif. Il retournera le nœud actif.</td>
+</tr>
+<tr class="even">
+<td>getActiveSlideIndex</td>
+<td><code>-</code></td>
+<td>Obtenez un glissement actif. Il retournera l'index du glissement
+actif.</td>
+</tr>
+<tr class="odd">
+<td>slidePlayerPlay</td>
+<td><code>number</code></td>
+<td>Lire la vidéo dans la diapositive spécifiée.</td>
+</tr>
+<tr class="even">
+<td>slidePlayerPause</td>
+<td><code>number</code></td>
+<td>Pause vidéo dans la diapositive spécifiée.</td>
+</tr>
+<tr class="odd">
+<td>getSlidePlayerInstance</td>
+<td><code>node, index</code></td>
+<td>Obtenir le lecteur vidéo de la diapositive spécifiée.</td>
+</tr>
+<tr class="even">
+<td>getAllPlayers</td>
+<td><code>-</code></td>
+<td>Obtenez tous les lecteurs de vidéo.</td>
+</tr>
+<tr class="odd">
+<td>setElements</td>
+<td><code>[]</code></td>
+<td>Mettre à jour les éléments de la galerie de la lightbox.</td>
+</tr>
+<tr class="even">
+<td>on</td>
+<td><code>string, function</code></td>
+<td>Fixer un auditeur d'événement. Voir la section Événements</td>
+</tr>
+<tr class="odd">
+<td>once</td>
+<td><code>string, function</code></td>
+<td>Définissez un auditeur d'événement qui ne sera déclenché qu'une
+seule fois. Voir la section Événements</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Example set custom gallery items</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">// This overwrites all the items in the gallery</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">setElements</span>([</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;href&#39;</span><span class="op">:</span> <span class="st">&#39;https://picsum.photos/1200/800&#39;</span><span class="op">,</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;type&#39;</span><span class="op">:</span> <span class="st">&#39;image&#39;</span> <span class="co">// Type is only required if GLightbox fails to know what kind of content should display</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;href&#39;</span><span class="op">:</span> <span class="st">&#39;https://www.youtube.com/watch?v=Ga6RYejo6Hk&#39;</span><span class="op">,</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;type&#39;</span><span class="op">:</span> <span class="st">&#39;video&#39;</span><span class="op">,</span> <span class="co">// Type is only required if GLightbox fails to know what kind of content should display</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;width&#39;</span><span class="op">:</span> <span class="st">&#39;900px&#39;</span><span class="op">,</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;content&#39;</span><span class="op">:</span> <span class="st">&#39;&lt;p&gt;some html to append in the slide&lt;/p&gt;&#39;</span><span class="op">,</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;width&#39;</span><span class="op">:</span> <span class="st">&#39;900px&#39;</span><span class="op">,</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>])<span class="op">;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Insert a single slide at the end of all the items,</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">insertSlide</span>({</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">href</span><span class="op">:</span> <span class="st">&#39;video url...&#39;</span><span class="op">,</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="st">&#39;90vw&#39;</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">// Insert a single slide at index 2 or pass 0 to add it at the start</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">insertSlide</span>({</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">href</span><span class="op">:</span> <span class="st">&#39;video url...&#39;</span><span class="op">,</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="st">&#39;90vw&#39;</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">// You can insert a slide with a defined html</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">insertSlide</span>({</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">content</span><span class="op">:</span> <span class="st">&#39;&lt;p&gt;some html to append in the slide&lt;/p&gt;&#39;</span><span class="op">,</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="st">&#39;90vw&#39;</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">// Or if you prefer you can pass a node</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">// and it will be inserted in the slide</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">insertSlide</span>({</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">content</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;inline-example&#39;</span>)<span class="op">,</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="st">&#39;90vw&#39;</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co">// Remove the slide at index 2</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">removeSlide</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co">// Open the lightbox</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">open</span>()<span class="op">;</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co">// You can also open the lightbox at a specific index</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>lightbox<span class="op">.</span><span class="fu">openAt</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co">// So imagine that you are making an ajax request that returns some html</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="co">// You can create an empty instance and append the content once is returned</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ajaxExample <span class="op">=</span> <span class="fu">GLightbox</span>({ <span class="dt">selector</span><span class="op">:</span> <span class="kw">null</span> })<span class="op">;</span> <span class="co">// or you can set the selector empty selector: &#39;&#39;</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a><span class="fu">doAjaxCall</span>({<span class="op">...</span>})<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> {</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    ajaxExample<span class="op">.</span><span class="fu">insertSlide</span>({</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        <span class="dt">width</span><span class="op">:</span> <span class="st">&#39;500px&#39;</span><span class="op">,</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        <span class="dt">content</span><span class="op">:</span> response<span class="op">.</span><span class="at">html</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    ajaxExample<span class="op">.</span><span class="fu">open</span>()<span class="op">;</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="co">// Or you could use the set elements method to empty all the slides if any</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a><span class="fu">doAjaxCall</span>({<span class="op">...</span>})<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> {</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>    ajaxExample<span class="op">.</span><span class="fu">setElements</span>([</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>        <span class="dt">content</span><span class="op">:</span> response<span class="op">.</span><span class="at">html</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    ])<span class="op">;</span></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    ajaxExample<span class="op">.</span><span class="fu">open</span>()<span class="op">;</span></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<h2 id="animations">Animations</h2>
+<p>Les animations sont créées avec CSS, chaque effet a une valeur entrée
+et sortie et ils sont utilisés pour attacher les classes correctes au
+nœud.</p>
+<p>Par exemple, si vous utilisez</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> glightbox <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">openEffect</span><span class="op">:</span> <span class="st">&#39;zoom&#39;</span><span class="op">,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">closeEffect</span><span class="op">:</span> <span class="st">&#39;fade&#39;</span><span class="op">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">cssEfects</span><span class="op">:</span> {</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This are some of the animations included, no need to overwrite</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fade</span><span class="op">:</span> { <span class="kw">in</span><span class="op">:</span> <span class="st">&#39;fadeIn&#39;</span><span class="op">,</span> <span class="dt">out</span><span class="op">:</span> <span class="st">&#39;fadeOut&#39;</span> }<span class="op">,</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">zoom</span><span class="op">:</span> { <span class="kw">in</span><span class="op">:</span> <span class="st">&#39;zoomIn&#39;</span><span class="op">,</span> <span class="dt">out</span><span class="op">:</span> <span class="st">&#39;zoomOut&#39;</span> }</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>L'effet ouvert utilisera cssEfects.zoom.in et ajoutera la classe
+gzoomIn, si vous regardez le CSS vous verrez :</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="at">gzoomIn</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">animation</span><span class="op">:</span> gzoomIn <span class="op">.</span><span class="dv">5</span><span class="er">s</span> ease<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>@keyframes gzoomIn {</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> {</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">opacity</span><span class="op">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">transform</span><span class="op">:</span> <span class="fu">scale3d</span>(<span class="op">.</span><span class="dv">3</span><span class="op">,</span> <span class="op">.</span><span class="dv">3</span><span class="op">,</span> <span class="op">.</span><span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    to {</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">opacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="ajout-dune-animation-personnalisée">Ajout d'une animation
+personnalisée</h3>
+<p>Vous pouvez créer n'importe quelle animation que vous voulez, vous
+pouvez trouver une inspiration dans la bibliothèque Animate.css, par
+exemple vous pouvez ajouter l'animation rebond comme ceci:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> glightbox <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">openEffect</span><span class="op">:</span> <span class="st">&#39;bounce&#39;</span><span class="op">,</span> <span class="co">// Define that we want the bounce animation on open</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">cssEfects</span><span class="op">:</span> {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// register our new animation</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bounce</span><span class="op">:</span> { <span class="kw">in</span><span class="op">:</span> <span class="st">&#39;bounceIn&#39;</span><span class="op">,</span> <span class="dt">out</span><span class="op">:</span> <span class="st">&#39;bounceOut&#39;</span> }</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*A g will be appended to the animation name so bounceIn will become gbounceIn */</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.gbounceIn</span> {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">animation</span>: bounceIn <span class="dv">1.3</span><span class="dt">s</span> <span class="dv">ease</span><span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="im">@keyframes</span> bounceIn {</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">from</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">20%</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">40%</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">60%</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">80%</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">to</span> {</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">animation-timing-function</span>: <span class="fu">cubic-bezier(</span><span class="dv">0.215</span><span class="op">,</span> <span class="dv">0.61</span><span class="op">,</span> <span class="dv">0.355</span><span class="op">,</span> <span class="dv">1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0%</span> {</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">opacity</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">0.3</span><span class="op">,</span> <span class="dv">0.3</span><span class="op">,</span> <span class="dv">0.3</span>)<span class="op">;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="dv">20%</span> {</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">1.1</span><span class="op">,</span> <span class="dv">1.1</span><span class="op">,</span> <span class="dv">1.1</span>)<span class="op">;</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="dv">40%</span> {</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">0.9</span><span class="op">,</span> <span class="dv">0.9</span><span class="op">,</span> <span class="dv">0.9</span>)<span class="op">;</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="dv">60%</span> {</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">opacity</span>: <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">1.03</span><span class="op">,</span> <span class="dv">1.03</span><span class="op">,</span> <span class="dv">1.03</span>)<span class="op">;</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="dv">80%</span> {</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">0.97</span><span class="op">,</span> <span class="dv">0.97</span><span class="op">,</span> <span class="dv">0.97</span>)<span class="op">;</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="dv">to</span> {</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">opacity</span>: <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: scale3d(<span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="thématique">Thématique</h2>
+<p>Vous pouvez complètement personnaliser la structure de GLightbox et
+utiliser du CSS pour changer n'importe quelle partie que vous
+voulez.</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> customLightboxHTML <span class="op">=</span> <span class="vs">`&lt;div id=&quot;glightbox-body&quot; class=&quot;glightbox-container&quot;&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class=&quot;gloader visible&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class=&quot;goverlay&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class=&quot;gcontainer&quot;&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div id=&quot;glightbox-slider&quot; class=&quot;gslider&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class=&quot;gnext gbtn&quot; tabindex=&quot;0&quot; aria-label=&quot;Next&quot; data-customattribute=&quot;example&quot;&gt;{nextSVG}&lt;/button&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class=&quot;gprev gbtn&quot; tabindex=&quot;1&quot; aria-label=&quot;Previous&quot;&gt;{prevSVG}&lt;/button&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class=&quot;gclose gbtn&quot; tabindex=&quot;2&quot; aria-label=&quot;Close&quot;&gt;{closeSVG}&lt;/button&gt;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> customSlideHTML <span class="op">=</span> <span class="vs">`&lt;div class=&quot;gslide&quot;&gt;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class=&quot;gslide-inner-content&quot;&gt;</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class=&quot;ginner-container&quot;&gt;</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class=&quot;gslide-media&quot;&gt;</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class=&quot;gslide-description&quot;&gt;</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;div class=&quot;gdesc-inner&quot;&gt;</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="vs">                    &lt;h4 class=&quot;gslide-title&quot;&gt;&lt;/h4&gt;</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="vs">                    &lt;div class=&quot;gslide-desc&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;/div&gt;</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> glightbox <span class="op">=</span> <span class="fu">GLightbox</span>({</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">lightboxHTML</span><span class="op">:</span> customLightboxHTML<span class="op">,</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">slideHTML</span><span class="op">:</span> customSlideHTML<span class="op">,</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">skin</span><span class="op">:</span> <span class="st">&#39;supercool&#39;</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>You can also define a skin name and the lightbox will append the
+class name "glightbox-supercool" so you can customize it with CSS, this
+will leave a barebones structure so you can change the buttons
+appearance, etc.</p>
+<h2 id="développement">Développement</h2>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm run watch</span></code></pre></div>
+<h2 id="browser-support">Browser Support</h2>
+<p>GLightbox a été testé dans les navigateurs suivants.</p>
+<ul>
+<li>Safari</li>
+<li>Mobile Safari</li>
+<li>Opera</li>
+<li>Edge</li>
+<li>Firefox</li>
+<li>Internet Explorer 11</li>
+</ul>
+<p>Il fonctionnera dans n'importe quel autre navigateur prenant en
+charge CSS Flexbox</p>
+<h2 id="contribution">Contribution</h2>
+<p>N'hésitez pas à signaler tout problème. Si vous souhaitez contribuer
+en corrigeant un bogue ou en mettant en œuvre une nouvelle
+fonctionnalité, veuillez d'abord lire le guide <a
+href="./CONTRIBUTING.md">CONTRIBUTING</a>.</p>
+<h2 id="dons">Dons</h2>
+<p>Si vous trouvez ce code utile, veuillez envisager un don pour
+maintenir l'augmentation de ce projet, n'importe quel montant est
+apprécié.</p>
+<p><a href="https://paypal.me/bdigital9816/5usd"><img
+src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+alt="paypal" /></a></p>
+<h2 id="support">Support</h2>
+<p>Nous ne fournissons qu'un support pour les bogues et les demandes de
+fonctionnalités, donc s'il vous plaît ne postez que des problèmes sur
+ces deux sujets, si vous avez besoin d'aide pour implémenter GLightbox
+ou vous commencez tout juste avec HTML/CSS/Javascript s'il vous plaît
+utiliser stackoverlow, vous serez en mesure de trouver plus d'aide
+là-bas. Cela nous aidera à maintenir les questions liées à la
+bibliothèque et à résoudre les problèmes plus rapidement.</p>
+<h2 id="changelog">Changelog</h2>
+<h4 id="dernière-version-indéfinie">Dernière version indéfinie</h4>
+<p>Voir le fichier <a href="CHANGELOG.md">CHANGELOG.md</a> pour plus de
+details.</p>
+<h2 id="license">License</h2>
+<p>Ce projet est sous licence du MIT - voir le dossier <a
+href="LICENSE.md">LICENSE.md</a> pour plus de details.</p>
+</div>
+</body>
+
+</html>
