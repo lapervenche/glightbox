@@ -2,7 +2,7 @@
 
 GLIGHTBOX est un pur javascript lightbox. Il peut afficher des images, des iframes, du contenu en ligne et des vidéos avec une lecture automatique en option pour YouTube, Vimeo et même des vidéos hébergées.
 
-## Features
+## Caractéristiques
 
 - **Léger** - seulement 11KB Gzipped.
 - **Rapide et Responsive** - fonctionne avec n'importe quelle taille d'écran.
@@ -17,9 +17,9 @@ GLIGHTBOX est un pur javascript lightbox. Il peut afficher des images, des ifram
 - **API** - contrôler la boîte à lumière avec les méthodes fournies
 - **Skinable** - créez votre skin personnel ou modifiez les animations avec quelques modifications mineures de css
 
-## Demo en direct
+## Démo en direct
 
-You can check the live demo [right here](https://biati-digital.github.io/glightbox/)
+Vous pouvez vérifier la démo en direct [right here](https://biati-digital.github.io/glightbox/)
 
 ## Utilisation
 
@@ -39,13 +39,13 @@ import '/path/to/glightbox.js';
 import GLightbox from 'glightbox';
 ```
 
-Or manually download and link `glightbox.min.js` in your HTML:
+Ou télécharger et lier manuellement `glightbox.min.js` dans votre code HTML:
 
 ```html
 <link rel="stylesheet" href="dist/css/glightbox.css" />
 <script src="dist/js/glightbox.min.js"></script>
 
-<!-- USING A CDN -->
+<!-- UTILISER UN CDN -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
@@ -54,7 +54,7 @@ Or manually download and link `glightbox.min.js` in your HTML:
   const lightbox = GLightbox({ ...options });
 </script>
 
-<!-- USING ES MODULES -->
+<!-- Utilisation des modules ES -->
 
 <script type="module">
   import 'https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js';
@@ -71,12 +71,12 @@ Or manually download and link `glightbox.min.js` in your HTML:
   <img src="small.jpg" alt="image" />
 </a>
 
-<!-- Video -->
+<!-- Vidéo -->
 <a href="https://vimeo.com/115041822" class="glightbox2">
   <img src="small.jpg" alt="image" />
 </a>
 
-<!-- Gallery -->
+<!-- Galerie -->
 <a href="large.jpg" class="glightbox3" data-gallery="gallery1">
   <img src="small.jpg" alt="image" />
 </a>
@@ -89,7 +89,7 @@ Or manually download and link `glightbox.min.js` in your HTML:
   <img src="small.jpg" alt="image" />
 </a>
 
-<!-- Advanced Description -->
+<!-- Description Avancée -->
 <a href="large.jpg" class="glightbox5" data-glightbox="title: My title; description: .custom-desc1">
   <img src="small.jpg" alt="image" />
 </a>
@@ -99,18 +99,20 @@ Or manually download and link `glightbox.min.js` in your HTML:
   <p>You can add links and any HTML you want</p>
 </div>
 
-<!-- URL with no extension -->
+<!-- URL sans extension -->
 <a href="https://picsum.photos/1200/800" data-glightbox="type: image">
   <img src="small.jpg" alt="image" />
 </a>
-<!-- OR using multiple data attributes -->
+<!-- Ou en utilisant plusieurs attributs de données -->
 <a href="https://picsum.photos/1200/800" data-type="image">
   <img src="small.jpg" alt="image" />
 </a>
 
-<!-- Using responsive images: specify sizes and srcset through data attributes in the
-     same way you would with the img tag.
-     See: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images -->
+<!-- Utilisation d'images réactives: spécifiez les tailles et SRCSET via des attributs de données de la même manière
+que vous le feriez avec la balise IMG.
+     Voir:
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+ -->
 <a href="deafult.jpg" class="glightbox6" data-title="Responsive example"
 data-description="Your browser will choose the optimal image for the resolution"
 data-sizes="(max-width: 600px) 480px, 800px"
@@ -135,10 +137,10 @@ You can specify some options to each individual slide, the available options are
 - draggable
 
 ```html
-<!-- One line config -->
+<!-- Configuration d'une ligne -->
 <a href="large.jpg" data-glightbox="title: Your title; description: description here; descPosition: left; type: image; effect: fade; width: 900px; height: auto; zoomable: true; draggable: true;"></a>
 
-<!-- Multiple data attributes / You can use the options as separated data attributes -->
+<!-- Plusieurs attributs de données / Vous pouvez utiliser les options comme attributs de données séparés -->
 <a
   href="large.jpg"
   data-title="My title"
@@ -155,7 +157,7 @@ You can specify some options to each individual slide, the available options are
 
 ## Lightbox Options
 
-Example use of the options.
+Exemple d'utilisation des options.
 
 ```javascript
 const lightbox = GLightbox({
@@ -164,7 +166,7 @@ const lightbox = GLightbox({
     autoplayVideos: true
 });
 
-// Instead of using a selector, define the gallery elements
+// Au lieu d'utiliser un sélecteur, définissez les éléments de la galerie
 const myGallery = GLightbox({
     elements: [
         {
@@ -195,7 +197,7 @@ const myGallery = GLightbox({
 });
 myGallery.open();
 
-// If later you need to modify the elements you can use setElements
+// Si plus tard, vous devez modifier les éléments, vous pouvez utiliser setElements
 myGallery.setElements([...]);
 ```
 
